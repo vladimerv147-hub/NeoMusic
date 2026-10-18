@@ -20,9 +20,11 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-
       - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses
+        run: |
+          mkdir -p "$ANDROID_HOME/licenses"
+          echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$ANDROID_HOME/licenses/android-sdk-license"
+          yes | sdkmanager --licenses
 
       - name: Unzip project
         run: |
